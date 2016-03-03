@@ -39,6 +39,7 @@ func rx(pattern: String, options: NSRegularExpressionOptions) -> NSRegularExpres
     catch {
         assert(false, "\(__FUNCTION__)::error:\(error)")
     }
+    assert(false, "\(__FUNCTION__)::error:\(0)")
 }
 
 extension NSRegularExpression {
@@ -72,7 +73,6 @@ extension NSRegularExpression {
         for match in matches {
             matchingRanges.append(NSValue.init(range: match.range))
         }
-        print("matcheeeeeees: \(matches)")
         
         var pieceRanges = [NSValue]()
         let firstRange = NSMakeRange(0, matchingRanges.count == 0 ? text.characters.count : matchingRanges.first!.rangeValue.location)
@@ -204,44 +204,44 @@ extension String {
         return rx(self, options: options)
     }
     
-    func rx_isMatch(regex: String) -> Bool {
-        return rx(regex).rx_isMatch(self)
+    func rx_isMatch(regex: NSRegularExpression) -> Bool {
+        return regex.rx_isMatch(self)
     }
     
-    func rx_indexOf(regex: String) -> Int {
-        return rx(regex).rx_indexOf(self)
+    func rx_indexOf(regex: NSRegularExpression) -> Int {
+        return regex.rx_indexOf(self)
     }
     
-    func rx_split(regex: String) -> [String] {
-        return rx(regex).rx_split(self)
+    func rx_split(regex: NSRegularExpression) -> [String] {
+        return regex.rx_split(self)
     }
     
-    func rx_replace(regex: String, with replacement: String) -> String {
-        return rx(regex).rx_replace(self, with: replacement)
+    func rx_replace(regex: NSRegularExpression, with replacement: String) -> String {
+        return regex.rx_replace(self, with: replacement)
     }
     
-    func rx_replace(regex: String, withBlock handler: (String -> String?)) -> String {
-        return rx(regex).rx_replace(self, withBlock: handler)
+    func rx_replace(regex: NSRegularExpression, withBlock handler: (String -> String?)) -> String {
+        return regex.rx_replace(self, withBlock: handler)
     }
     
-    func rx_replace(regex: String, withDetailsBlock handler: (RxMatch -> String?)) -> String {
-        return rx(regex).rx_replace(self, withDetailsBlock: handler)
+    func rx_replace(regex: NSRegularExpression, withDetailsBlock handler: (RxMatch -> String?)) -> String {
+        return regex.rx_replace(self, withDetailsBlock: handler)
     }
     
-    func rx_matches(regex: String) -> [String] {
-        return rx(regex).rx_matches(self)
+    func rx_matches(regex: NSRegularExpression) -> [String] {
+        return regex.rx_matches(self)
     }
     
-    func rx_firstMatch(regex: String) -> String? {
-        return rx(regex).rx_firstMatch(self)
+    func rx_firstMatch(regex: NSRegularExpression) -> String? {
+        return regex.rx_firstMatch(self)
     }
     
-    func rx_matchesWithDetails(regex: String) -> [RxMatch] {
-        return rx(regex).rx_matchesWithDetails(self)
+    func rx_matchesWithDetails(regex: NSRegularExpression) -> [RxMatch] {
+        return regex.rx_matchesWithDetails(self)
     }
     
-    func rx_firstMatchWithDetails(regex: String) -> RxMatch? {
-        return rx(regex).rx_firstMatchWithDetails(self)
+    func rx_firstMatchWithDetails(regex: NSRegularExpression) -> RxMatch? {
+        return regex.rx_firstMatchWithDetails(self)
     }
     
     /**
@@ -276,6 +276,4 @@ extension String {
     }
     
 }
-
-
 
